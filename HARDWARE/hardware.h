@@ -1,0 +1,58 @@
+//////////////////////////////////////////////////////////////////////////////////////
+// By Rob F. / Entire Group
+//////////////////////////////////////////////////////////////////////////////////////
+
+#ifndef __HARDWARE_H
+#define __HARDWARE_H
+
+
+#include "SysType.h"
+#include "hdtimers.h"
+#include "hdports.h"
+//#include "hdspi.h"
+#include "hdadc.h"
+/////////////////////////////////////////////////////////////////////////////
+// Sys Define
+/////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////
+// Hard Ver 1
+/////////////////////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+    hdPin_O_DefineSetup(LEDA,           A,  5, hd_gptp_OUT_PP,     0);
+    #define LEDA(_v)                    dH_PORT_Write(LEDA,_v)
+
+    hdPin_O_DefineSetup(KEY,           	C, 13, hd_gptp_IN_PPU,     0);
+    #define KEY_HARDWARE()              dH_PORT_Read(KEY)
+		#define KEY()												(!KEY_HARDWARE())
+
+    hdPin_O_DefineSetup(ADC12IN10,     	C,  0, hd_gptp_IN_PPD,     0);
+    hdPin_O_DefineSetup(ADC12IN6,     	A,  6, hd_gptp_IN_PPD,     0);
+		
+
+
+#define macRead_ADC_GroupNAME(_name)    ((u32)(_name##wp_port | _name##wp_pin))
+#define macRead_ADC_GroupBIT(_name)     Read_ADC_GroupBIT(macRead_ADC_GroupNAME(_name))
+
+
+
+		#define Read_ADC12IN10()    macRead_ADC_GroupBIT(ADC12IN10)          //12IN10
+		#define Read_ADC12IN6()     macRead_ADC_GroupBIT(ADC12IN6)           //12IN6
+		#define HumadityReadADC()										Read_ADC12IN6()
+		#define HumadityPower(_v)										LEDA(_v)
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Extern Procedures
+/////////////////////////////////////////////////////////////////////////////
+extern void Init(void);
+
+
+
+
+#endif
