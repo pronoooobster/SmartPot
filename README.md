@@ -1,4 +1,5 @@
 Pot for plants with soil moisture control and automated watering
+
 Technologies used: C, C++, Various STM32 libraries, Git.
 
 - Based on STM32 F103RB board;
